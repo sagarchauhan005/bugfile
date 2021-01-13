@@ -7,6 +7,10 @@ A simple package to capture and log all the bugs in your app and report it to ou
 
 ![Imgur](https://i.imgur.com/x0cEVtu.jpg)
 
+# Installation
+
+Run `composer require sagarchauhan/bugfile` into your app and then follow the below steps.
+
 # Getting Started
 
 - Visit our [Bug Management and Incidence Reporting tool](https://localhost:8002) at create an account.
