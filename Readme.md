@@ -44,6 +44,34 @@ try{
 
 ```
 
+# Methods
+
+List of all the methods that you can use to send logs to our tool
+
+| Method        | Description           | Required  |
+| ------------- |:-------------:| -----:|
+| causedBy()      | User id of the user who faces the exception | False |
+| causedAt()      | Location of exception, generally a file or page name      |   False |
+| severity() | Level of urgency for this exception      |    True |
+| customData() | Any custom data like a payload or array you wish to pass      |    False |
+| log() | The original exception we get in caught block      |    True |
+| setMessage() | A plan message/comment to tag the exception      |    True |
+| loggedBy() | Name of developer who caught this exception      |    False |
+| save() | saves the data and passes it to out tool      |    True |
+
+# Log Severity
+
+| Severity        | Code           | Alert  |
+| ------------- |:-------------:| -----:|
+| LOG_INFO      | 0 | False |
+| LOG_DEBUG      | 1 |   False |
+| LOG_NOTICE | 2 |    False |
+| LOG_WARNING | 3 |    False |
+| LOG_ERROR | 4 |    False |
+| LOG_CRITICAL | 5 |    TRUE |
+| LOG_ALERT | 5 |    TRUE |
+| LOG_EMERGENCY | 7 |    TRUE |
+
 # Author
 
 [Sagar Chauhan](https://twitter.com/chauhansahab005) works as a Project Manager - Technology at [Greenhonchos](https://www.greenhonchos.com).
