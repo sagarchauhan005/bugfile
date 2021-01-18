@@ -8,7 +8,5 @@
             "email": "sagar.chauhan@greenhonchos.com"
         }
     ],
-    "autoload": {
-        "psr-4": {"sagar\\BugFile\\": "src/"}
-    }
+    "require": {}
 }
