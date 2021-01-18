@@ -10,6 +10,5 @@
     ],
     "autoload": {
         "psr-4": {"sagar\\BugFile\\": "src/"}
-    },
-    "minimum-stability": "stable"
+    }
 }
