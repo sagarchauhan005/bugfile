@@ -1,9 +1,6 @@
 {
     "name": "sagarchauhan/bugfile",
     "description": "Bug Logger",
-    "require": {
-        "ixudra/curl": "^6.21"
-    },
     "license": "MIT",
     "authors": [
         {

@@ -11,12 +11,12 @@ A simple package to capture and log all the bugs in your app and report it to ou
 
 Run `composer require sagarchauhan/bugfile` into your app and then follow the below steps.
 
-# Getting Started
+# Getting Started (PHP FRAMEWORK)
 
 - Visit our [Bug Management and Incidence Reporting tool](https://localhost:8002) at create an account.
 - Add your site
 - You shall receive three keys for your LIVE, STAGING and DEV environment along with an end-point
-- Paste the keys in your app's .env file.
+- For any PHP based framework like LARAVEL, LUMEN, Zend etc. Paste the keys in your app's .env file.
 - Lastly, paste the below code in your Handler.php file under `report` function
 ```php
 $bug = new BugFile();
@@ -36,6 +36,55 @@ try{
     // some logical code
 }catch (Exception $e){
     $bug = new BugFile();
+    $bug->causedBy(\Illuminate\Support\Facades\Auth::id());
+    $bug->causedAt("Login Page");
+    $bug->setSeverity(BugFile::LOG_INFO);
+    $bug->customData(['last_login'=>'today']);
+    $bug->log($e);
+    $bug->setMessage('Something happened at login function');
+    $bug->loggedBy('Sagar Chauhan - PM');
+    $bug->save();
+}
+
+```
+
+# Getting Started (CORE PHP)
+- Visit our [Bug Management and Incidence Reporting tool](https://localhost:8002) at create an account.
+- Add your site
+- You shall receive three keys for your LIVE, STAGING and DEV environment along with an end-point
+- Make sure to pass the below config array when you call the logger class
+  ```php
+      $config = [
+          'APP_ENV'=>'local',
+          'BUGFILE_END_POINT'=>'https://localhost:8002/api/logs',
+          'BUGFILE_KEY_DEV'=>'',
+          'BUGFILE_KEY_STAGING'=>'',
+          'BUGFILE_KEY_LIVE'=>''
+      ];
+      $bug = new BugFile($config);
+      $bug->causedBy(BugFile::DEFAULT_USER);
+      $bug->causedAt(BugFile::DEFAULT_SOURCE);
+      $bug->setSeverity(BugFile::LOG_INFO);
+      $bug->customData(BugFile::DEFAULT_DATA);
+      $bug->log($e);
+      $bug->setMessage(BugFile::DEFAULT_MESSAGE);
+      $bug->loggedBy(BugFile::DEFAULT_LOGGER);
+      $bug->save();
+  ```
+- This shall capture all the exceptions and report to our tool automatically.
+- To manually report an exception, use the same above code at any `catch` block in `try-catch` method like below
+```php
+    $config = [
+          'APP_ENV'=>'local',
+          'BUGFILE_END_POINT'=>'https://localhost:8002/api/logs',
+          'BUGFILE_KEY_DEV'=>'',
+          'BUGFILE_KEY_STAGING'=>'',
+          'BUGFILE_KEY_LIVE'=>''
+      ];
+try{
+    // some logical code
+}catch (Exception $e){
+    $bug = new BugFile($config);
     $bug->causedBy(\Illuminate\Support\Facades\Auth::id());
     $bug->causedAt("Login Page");
     $bug->setSeverity(BugFile::LOG_INFO);
