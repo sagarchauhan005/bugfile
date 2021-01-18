@@ -54,6 +54,12 @@ try{
 - You shall receive three keys for your LIVE, STAGING and DEV environment along with an end-point
 - Make sure to pass the below config array when you call the logger class
   ```php
+      require 'vendor/autoload.php'; //Check the relative path to autoload as per your directory
+      use sagar\BugFile\BugFile;
+       
+      // you can also make this config folder part of your larger env variable file which
+      // gets called everywhere or like a db.php file.
+      // Basically you do not need to define it everytime.
       $config = [
           'APP_ENV'=>'local',
           'BUGFILE_END_POINT'=>'https://localhost:8002/api/logs',
