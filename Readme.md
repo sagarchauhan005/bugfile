@@ -49,7 +49,7 @@ try{
 ```
 
 # Getting Started (CORE PHP)
-- Visit our [Bug Management and Incidence Reporting tool](https://localhost:8002) at create an account.
+- Visit our [Bug Management and Incidence Reporting tool](https://logs.greenhonchos.com/) at create an account.
 - Add your site
 - You shall receive three keys for your LIVE, STAGING and DEV environment along with an end-point
 - Make sure to pass the below config array when you call the logger class
