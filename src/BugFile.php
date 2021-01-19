@@ -1,5 +1,6 @@
 <?php
 namespace sagar\BugFile;
+
 class BugFile
 {
     private $env, $end_point, $key, $severity, $message, $user, $withData, $logger, $logData, $source, $config=null;
@@ -130,17 +131,19 @@ class BugFile
      * Performs the curl operation to the tools endpoint
      */
     public function save(){
-        $postdata = json_encode(self::getData());
-        $opts = array('http' =>
-            array(
-                'method'  => 'GET',
-                'header'  => "Content-Type: application/json\r\n".
-                    "X-Authorization:".$this->key ."\r\n",
-                'content' => $postdata
-            )
-        );
-        $context  = stream_context_create($opts);
-        file_get_contents($this->end_point, false, $context);
+        $url = $this->end_point;
+        $data = self::getData();
+        $postdata = json_encode($data);
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json','X-Authorization:'.$this->key));
+        $result = curl_exec($ch);
+        curl_close($ch);
     }
 
     /**
