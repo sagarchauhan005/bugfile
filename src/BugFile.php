@@ -3,6 +3,7 @@ namespace sagar\BugFile;
 
 class BugFile
 {
+    /*updated*/
     private $env, $end_point, $key, $severity, $message, $user, $withData, $logger, $logData, $source, $config=null;
     const LOG_INFO=0;
     const LOG_DEBUG=1;
