@@ -13,7 +13,7 @@ Run `composer require sagarchauhan/bugfile` into your app and then follow the be
 
 # Getting Started (PHP FRAMEWORK)
 
-- Visit our [Bug Management and Incidence Reporting tool](https://localhost:8002) at create an account.
+- Visit our [Bug Management and Incidence Reporting tool](https://logs.kartmax.in/) at create an account.
 - Add your site
 - You shall receive three keys for your LIVE, STAGING and DEV environment along with an end-point
 - For any PHP based framework like LARAVEL, LUMEN, Zend etc. Paste the keys in your app's .env file.
@@ -54,39 +54,22 @@ try{
 - You shall receive three keys for your LIVE, STAGING and DEV environment along with an end-point
 - Make sure to pass the below config array when you call the logger class
   ```php
-      require 'vendor/autoload.php'; //Check the relative path to autoload as per your directory
-      use sagar\BugFile\BugFile;
-       
-      // you can also make this config folder part of your larger env variable file which
-      // gets called everywhere or like a db.php file.
-      // Basically you do not need to define it everytime.
-      $config = [
-          'APP_ENV'=>'local',
-          'BUGFILE_END_POINT'=>'https://localhost:8002/api/logs',
-          'BUGFILE_KEY_DEV'=>'',
-          'BUGFILE_KEY_STAGING'=>'',
-          'BUGFILE_KEY_LIVE'=>''
-      ];
-      $bug = new BugFile($config);
-      $bug->causedBy(BugFile::DEFAULT_USER);
-      $bug->causedAt(BugFile::DEFAULT_SOURCE);
-      $bug->setSeverity(BugFile::LOG_INFO);
-      $bug->customData(BugFile::DEFAULT_DATA);
-      $bug->log($e);
-      $bug->setMessage(BugFile::DEFAULT_MESSAGE);
-      $bug->loggedBy(BugFile::DEFAULT_LOGGER);
-      $bug->save();
+  #Add these lines just above the switch cases of pimresponse.php
+  require './ExceptionHandler.php';
+  $exceptionHandler = new ExceptionHandler(require 'config.php');
+  $exceptionHandler->handleException();
   ```
 - This shall capture all the exceptions and report to our tool automatically.
 - To manually report an exception, use the same above code at any `catch` block in `try-catch` method like below
 ```php
-    $config = [
-          'APP_ENV'=>'local',
-          'BUGFILE_END_POINT'=>'https://localhost:8002/api/logs',
-          'BUGFILE_KEY_DEV'=>'',
-          'BUGFILE_KEY_STAGING'=>'',
-          'BUGFILE_KEY_LIVE'=>''
-      ];
+$config = [
+      'APP_ENV'=>'local',
+      'BUGFILE_END_POINT'=>'https://localhost:8002/api/logs',
+      'BUGFILE_KEY_DEV'=>'',
+      'BUGFILE_KEY_STAGING'=>'',
+      'BUGFILE_KEY_LIVE'=>''
+  ];
+  
 try{
     // some logical code
 }catch (Exception $e){
@@ -137,6 +120,10 @@ List of all the methods that you can use to send logs to our tool
 In his spare time, he hunts bug as a Bug Bounty Hunter.
 Follow him at [Instagram](https://www.instagram.com/chauhansahab005/), [Twitter](https://twitter.com/chauhansahab005),  [Facebook](https://facebook.com/sagar.chauhan3),
 [Github](https://github.com/sagarchauhan005)
+
+# Contributor
+
+* Harish Rawat
 
 # License
 MIT
